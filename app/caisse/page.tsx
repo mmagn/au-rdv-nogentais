@@ -40,17 +40,17 @@ export default function Caisse() {
               </div>
 
               <div className="flex gap-x-2 items-center bg-gray-500 rounded-lg p-2">
-                <span>{item.quantity}</span>
-                <div>
+                <div className="flex items-center gap-x-2">
                   <button
                     onClick={() => updateQuantity(index, -1)}
-                    className="bg-red-500 text-white py-1 px-3 rounded-full rounded"
+                    className="bg-red-500 text-white py-1 px-3 rounded-lg rounded"
                   >
                     -
                   </button>
+                  <span className="text-xl font-bold">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(index, 1)}
-                    className="bg-green-500 text-white py-1 px-3 rounded-full rounded"
+                    className="bg-green-500 text-white py-1 px-3 rounded-lg rounded"
                   >
                     +
                   </button>
@@ -101,10 +101,10 @@ export default function Caisse() {
 
         <div className="flex flex-1 font-bold py-4">
           <div className="grid grid-cols-2 gap-4">
-            <button className="rounded-xl p-2 bg-yellow-500 text-black">
+            <button className="rounded-lg p-2 bg-yellow-500 text-black">
               Paiement en Espèces
             </button>
-            <button className="rounded-xl p-2 bg-emerald-700">
+            <button className="rounded-lg p-2 bg-emerald-700">
               Paiement en CB
             </button>
           </div>
