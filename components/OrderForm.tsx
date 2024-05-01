@@ -1,9 +1,11 @@
-"use client"; // Add this at the top of the file
+"use client";
 
-import FormattedPrice from "@/components/FormattedPrice";
-import { useState } from "react";
+import React, { useState } from "react";
+import FormattedPrice from "./FormattedPrice";
 
-export default function Caisse() {
+export type OrderFormProps = {};
+
+export default function OrderForm({}: OrderFormProps) {
   // Initialize state for items
   const [items, setItems] = useState([
     { name: "Café", price: 0.5, quantity: 0 },
