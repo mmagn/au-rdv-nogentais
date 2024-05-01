@@ -34,10 +34,10 @@ export default function Caisse() {
                 <span>{item.name}</span>
               </div>
               <div className="flex flex-1 items-center">
-                <span>{item.price}</span>
+                <FormattedPrice value={item.price} />
               </div>
 
-              <div className="flex gap-x-2 items-center">
+              <div className="flex gap-x-2 items-center bg-gray-500 rounded-lg p-2">
                 <span>{item.quantity}</span>
                 <div>
                   <button
