@@ -30,10 +30,14 @@ export default function Caisse() {
         {items.map((item, index) => (
           <div key={item.name} className="py-4">
             <div className="flex gap-x-4 ">
-              <div className="flex-1">{item.name}</div>
-              <div className="flex-1">{item.price}</div>
+              <div className="flex flex-1 items-center">
+                <span>{item.name}</span>
+              </div>
+              <div className="flex flex-1 items-center">
+                <span>{item.price}</span>
+              </div>
 
-              <div className="flex gap-x-2">
+              <div className="flex gap-x-2 items-center">
                 <span>{item.quantity}</span>
                 <div>
                   <button
@@ -50,7 +54,7 @@ export default function Caisse() {
                   </button>
                 </div>
               </div>
-              <div className="flex-1 text-right">
+              <div className="flex flex-1 items-center justify-end">
                 <FormattedPrice value={item.price * item.quantity} />
               </div>
             </div>
