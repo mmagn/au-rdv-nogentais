@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import FormattedPrice from "./FormattedPrice";
 import { OrderItem } from "@prisma/client";
-import { menu } from "@/data/menu";
+import { getMenu } from "@/data/menu";
 import OrderItems from "./OrderItems";
+import { createOrder } from "@/actions/orders";
+import OrderSubmitButton from "./OrderSubmitButton";
 
 export type OrderFormProps = {};
 
@@ -16,7 +18,7 @@ export type OrderItemForm = {
 
 export default function OrderForm({}: OrderFormProps) {
   // Initialize state for items
-  const [items, setItems] = useState<OrderItemForm[]>(menu);
+  const [items, setItems] = useState<OrderItemForm[]>(getMenu());
 
   // Handler to update quantity
   const updateQuantity = (index: number, amount: number) => {
@@ -32,8 +34,13 @@ export default function OrderForm({}: OrderFormProps) {
 
   const selectedItems = items.filter((item) => item.quantity > 0);
 
-  const handlePayment = (formData: FormData) => {
-    console.log(JSON.stringify(formData.get("order")));
+  const handlePayment = async (formData: FormData) => {
+    const items = JSON.parse(formData.get("items") as string);
+
+    await createOrder(formData.get("paymentMethod") as string, items);
+
+    // reset items
+    setItems(() => getMenu());
   };
 
   return (
@@ -87,28 +94,22 @@ export default function OrderForm({}: OrderFormProps) {
           <form action={handlePayment}>
             <input
               type="hidden"
-              name="order"
+              name="items"
               value={JSON.stringify(selectedItems)}
             />
             <div className="grid grid-cols-2 gap-4">
-              <button
-                disabled={selectedItems.length < 1}
-                type="submit"
-                name="paymentMethod"
+              <OrderSubmitButton
+                text="Paiement en Espèces"
                 value="cash"
-                className="rounded-lg p-2 bg-yellow-400 disabled:bg-gray-300 disabled:border-gray-500 border-b-4 border-yellow-600 text-black"
-              >
-                Paiement en Espèces
-              </button>
-              <button
                 disabled={selectedItems.length < 1}
-                type="submit"
-                name="paymentMethod"
+                className="bg-yellow-400 border-yellow-600 text-black"
+              />
+              <OrderSubmitButton
+                text="Paiement en CB"
                 value="card"
-                className="rounded-lg p-2 bg-emerald-700 disabled:text-black disabled:bg-gray-300 disabled:border-gray-500 border-b-4 border-emerald-900"
-              >
-                Paiement en CB
-              </button>
+                disabled={selectedItems.length < 1}
+                className="bg-emerald-700 border-emerald-900"
+              />
             </div>
           </form>
         </div>
