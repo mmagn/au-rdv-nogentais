@@ -7,6 +7,7 @@ import { getMenu } from "@/data/menu";
 import OrderItems from "./OrderItems";
 import { createOrder } from "@/actions/orders";
 import OrderSubmitButton from "./OrderSubmitButton";
+import { revalidatePath } from "next/cache";
 
 export type OrderFormProps = {};
 

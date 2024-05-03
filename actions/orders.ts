@@ -2,6 +2,7 @@
 
 import { total } from "@/lib/order";
 import { PrismaClient } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export const createOrder = async (
   paymentMethod: string,
@@ -9,7 +10,7 @@ export const createOrder = async (
 ) => {
   const prisma = new PrismaClient();
 
-  return await prisma.order.create({
+  const order = await prisma.order.create({
     data: {
       paymentMethod,
       total: total(items),
@@ -22,4 +23,8 @@ export const createOrder = async (
       },
     },
   });
+
+  revalidatePath("/orders");
+
+  return order;
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import OrderForm from "@/components/OrderForm";
 import { PrismaClient } from "@prisma/client";
 
 export default async function OrdersPage() {
@@ -8,10 +8,13 @@ export default async function OrdersPage() {
 
   return (
     <div>
-      <p>{orders.length} Orders</p>
-      {orders.map((order) => (
-        <p key={order.id}>{order.id}</p>
-      ))}
+      <OrderForm />
+      <div>
+        <p>{orders.length} Orders</p>
+        {orders.map((order) => (
+          <p key={order.id}>{order.id}</p>
+        ))}
+      </div>
     </div>
   );
 }
