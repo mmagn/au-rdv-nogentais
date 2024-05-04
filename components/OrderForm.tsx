@@ -8,6 +8,7 @@ import OrderItems from "./OrderItems";
 import { createOrder } from "@/actions/orders";
 import OrderSubmitButton from "./OrderSubmitButton";
 import { revalidatePath } from "next/cache";
+import { useToast } from "./ui/use-toast";
 
 export type OrderFormProps = {};
 
@@ -29,11 +30,9 @@ export default function OrderForm({}: OrderFormProps) {
     setItems(newItems);
   };
 
-  const totalPrice = items.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
-
   const selectedItems = items.filter((item) => item.quantity > 0);
+
+  const { toast } = useToast();
 
   const handlePayment = async (formData: FormData) => {
     const items = JSON.parse(formData.get("items") as string);
@@ -42,12 +41,14 @@ export default function OrderForm({}: OrderFormProps) {
 
     // reset items
     setItems(() => getMenu());
+
+    toast({
+      description: "✅ Commande enregistrée",
+    });
   };
 
   return (
-    <>
-      <h1>Caisse</h1>
-
+    <div>
       <div className="flex flex-col divide-y divide-gray-500">
         {items.map((item, index) => (
           <div key={item.name} className="py-4">
@@ -59,15 +60,15 @@ export default function OrderForm({}: OrderFormProps) {
                 <FormattedPrice value={item.price} />
               </div>
 
-              <div className="flex gap-x-2 items-center bg-gray-500 rounded-lg p-2">
-                <div className="flex items-center gap-x-2">
+              <div className="flex gap-x-2 items-center bg-gray-200 rounded-lg p-2">
+                <div className="flex items-center gap-x-2 font-bold">
                   <button
                     onClick={() => updateQuantity(index, -1)}
                     className="bg-red-500 text-white py-1 px-3 rounded-lg rounded"
                   >
                     -
                   </button>
-                  <span className="text-xl font-bold">{item.quantity}</span>
+                  <span className="text-xl ">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(index, 1)}
                     className="bg-green-500 text-white py-1 px-3 rounded-lg rounded"
@@ -86,7 +87,7 @@ export default function OrderForm({}: OrderFormProps) {
 
       {/* Recap */}
 
-      <div className="mx-auto mt-8 border-2 border-dashed border-gray-500 p-4 max-w-xs">
+      <div className="mx-auto mt-4 border-2 border-dashed border-gray-500 p-4 max-w-xs">
         <p className="font-bold text-xl mb-4">Récapitulatif de la commande</p>
 
         <OrderItems items={selectedItems as OrderItem[]} />
@@ -100,21 +101,21 @@ export default function OrderForm({}: OrderFormProps) {
             />
             <div className="grid grid-cols-2 gap-4">
               <OrderSubmitButton
-                text="Paiement en Espèces"
+                text="Paiement en Espèces 🪙"
                 value="cash"
                 disabled={selectedItems.length < 1}
                 className="bg-yellow-400 border-yellow-600 text-black"
               />
               <OrderSubmitButton
-                text="Paiement en CB"
+                text="Paiement en CB 💳"
                 value="card"
                 disabled={selectedItems.length < 1}
-                className="bg-emerald-700 border-emerald-900"
+                className="bg-emerald-500 border-emerald-700"
               />
             </div>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }

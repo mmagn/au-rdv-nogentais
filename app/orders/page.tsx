@@ -1,20 +1,30 @@
 import OrderForm from "@/components/OrderForm";
 import { PrismaClient } from "@prisma/client";
+import OrderList from "./OrderList";
 
 export default async function OrdersPage() {
   const prisma = new PrismaClient();
 
-  const orders = await prisma.order.findMany();
+  const orders = await prisma.order.findMany({
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+    where: {
+      createdAt: {
+        gte: new Date(new Date().setHours(0, 0, 0, 0)),
+      },
+    },
+    include: {
+      items: true,
+    },
+  });
 
   return (
-    <div>
+    <div className="mx-auto max-w-lg flex flex-col gap-y-10 mb-10 px-2">
       <OrderForm />
-      <div>
-        <p>{orders.length} Orders</p>
-        {orders.map((order) => (
-          <p key={order.id}>{order.id}</p>
-        ))}
-      </div>
+      <OrderList orders={orders} />
     </div>
   );
 }

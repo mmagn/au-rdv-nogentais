@@ -6,5 +6,5 @@ export default function FormattedPrice({ value }: { value: number }) {
     }).format(value / 100.0);
   };
 
-  return <span>{formatPrice(value)}</span>;
+  return <span className="font-mono">{formatPrice(value)}</span>;
 }
