@@ -22,10 +22,12 @@ export default async function OrdersPage() {
     },
   });
 
-  const totalCash = orders
+  const nonDeletedOrders = orders.filter((o) => !o.deletedAt);
+
+  const totalCash = nonDeletedOrders
     .filter((o) => o.paymentMethod === "cash")
     .reduce((acc, order) => acc + order.total, 0);
-  const totalCard = orders
+  const totalCard = nonDeletedOrders
     .filter((o) => o.paymentMethod === "card")
     .reduce((acc, order) => acc + order.total, 0);
 

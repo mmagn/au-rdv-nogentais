@@ -4,12 +4,12 @@ import { total } from "@/lib/order";
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
+const prisma = new PrismaClient();
+
 export const createOrder = async (
   paymentMethod: string,
   items: { quantity: number; price: number; name: string }[]
 ) => {
-  const prisma = new PrismaClient();
-
   const order = await prisma.order.create({
     data: {
       paymentMethod,
@@ -27,4 +27,19 @@ export const createOrder = async (
   revalidatePath("/orders");
 
   return order;
+};
+
+export const updateOrder = async (id: string, deleted: boolean) => {
+  const updatedOrder = await prisma.order.update({
+    where: {
+      id,
+    },
+    data: {
+      deletedAt: deleted ? new Date() : null,
+    },
+  });
+
+  revalidatePath("/orders");
+
+  return updatedOrder;
 };

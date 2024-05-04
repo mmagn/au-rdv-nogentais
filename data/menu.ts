@@ -1,4 +1,14 @@
 export const getMenu = () => [
-  { name: "Café", price: 50, quantity: 0 },
   { name: "Bière", price: 400, quantity: 0 },
+  { name: "Bière sans alcool", price: 300, quantity: 0 },
+  { name: "Vin", price: 200, quantity: 0 },
+  { name: "Boisson chaude", price: 100, quantity: 0 },
+  { name: "Jus de fruit", price: 150, quantity: 0 },
+  { name: "Limonade", price: 150, quantity: 0 },
+  { name: "Diabolo", price: 200, quantity: 0 },
+  { name: "Sirop", price: 50, quantity: 0 },
+  { name: "Collation", price: 200, quantity: 0 },
+  { name: "Adhésion", price: 600, quantity: 0 },
+  { name: "Ticket gratuit", price: 0, quantity: 0 },
+  { name: "Don", price: 50, quantity: 0 },
 ];

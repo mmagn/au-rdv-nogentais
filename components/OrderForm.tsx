@@ -60,17 +60,19 @@ export default function OrderForm({}: OrderFormProps) {
               </div>
 
               <div className="flex gap-x-2 items-center bg-gray-200 rounded-lg p-2">
-                <div className="flex items-center gap-x-2 font-bold">
+                <div className="flex items-center gap-x-2 font-bold font-mono">
                   <button
                     onClick={() => updateQuantity(index, -1)}
-                    className="bg-red-500 text-white py-1 px-3 rounded-lg rounded"
+                    className={`text-white py-1 px-3 rounded-lg ${
+                      item.quantity === 0 ? "bg-gray-400" : "bg-red-500"
+                    }`}
                   >
                     -
                   </button>
                   <span className="text-xl ">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(index, 1)}
-                    className="bg-green-500 text-white py-1 px-3 rounded-lg rounded"
+                    className="bg-green-500 text-white py-1 px-3 rounded-lg"
                   >
                     +
                   </button>

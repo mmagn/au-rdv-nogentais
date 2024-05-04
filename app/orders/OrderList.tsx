@@ -1,12 +1,4 @@
 import FormattedPrice from "@/components/FormattedPrice";
-import {
-  dateHumanized,
-  hoursHumanized,
-  paymentMethodHumanized,
-} from "@/lib/order";
-import React from "react";
-import ShowOrderButton from "./ShowOrderButton";
-import { Order, Prisma } from "@prisma/client";
 import OrderItems from "@/components/OrderItems";
 import {
   Accordion,
@@ -14,6 +6,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { hoursHumanized, paymentMethodHumanized } from "@/lib/order";
+import { Prisma } from "@prisma/client";
+
+import DeleteOrderButton from "./DeleteOrderButton";
 
 export type OrderListProps = {
   orders: Prisma.OrderGetPayload<{
@@ -36,18 +32,38 @@ export default function OrderList({ orders }: OrderListProps) {
           {orders.map((order) => (
             <AccordionItem value={order.id} key={order.id}>
               <AccordionTrigger>
-                <div key={order.id} className="flex-1 flex flex-row pt-1 mb-1">
-                  <div className="flex-1 font-mono text-left">
+                <div
+                  key={order.id}
+                  className={`flex-1 flex flex-row pt-1 mb-1 mr-2 ${
+                    order.deletedAt ? "text-gray-400" : ""
+                  }`}
+                >
+                  <div
+                    className={`flex-1 font-mono text-left ${
+                      order.deletedAt ? "line-through" : ""
+                    }`}
+                  >
                     {hoursHumanized(order.createdAt)}
                   </div>
                   <div className="flex-1 flex flex-col text-right">
-                    <FormattedPrice value={order.total} />
-                    <span>{paymentMethodHumanized(order.paymentMethod)}</span>
+                    {order.deletedAt ? (
+                      <span>Commande supprimée</span>
+                    ) : (
+                      <>
+                        <FormattedPrice value={order.total} />
+                        <span>
+                          {paymentMethodHumanized(order.paymentMethod)}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
               </AccordionTrigger>
               <AccordionContent>
                 <OrderItems items={order.items} />
+                <div className="flex justify-center">
+                  <DeleteOrderButton order={order} />
+                </div>
               </AccordionContent>
             </AccordionItem>
           ))}
