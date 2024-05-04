@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import FormattedPrice from "./FormattedPrice";
-import { OrderItem } from "@prisma/client";
-import { getMenu } from "@/data/menu";
-import OrderItems from "./OrderItems";
 import { createOrder } from "@/actions/orders";
+import { getMenu } from "@/data/menu";
+import { OrderItem } from "@prisma/client";
+import { useState } from "react";
+import FormattedPrice from "./FormattedPrice";
+import OrderItems from "./OrderItems";
 import OrderSubmitButton from "./OrderSubmitButton";
-import { revalidatePath } from "next/cache";
 import { useToast } from "./ui/use-toast";
 
 export type OrderFormProps = {};
