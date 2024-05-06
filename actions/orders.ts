@@ -24,7 +24,7 @@ export const createOrder = async (
     },
   });
 
-  revalidatePath("/orders");
+  revalidatePath("/admin/orders");
 
   return order;
 };
@@ -39,7 +39,7 @@ export const updateOrder = async (id: string, deleted: boolean) => {
     },
   });
 
-  revalidatePath("/orders");
+  revalidatePath("/admin/orders");
 
   return updatedOrder;
 };
