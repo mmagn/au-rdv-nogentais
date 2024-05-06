@@ -9,6 +9,6 @@ export const getMenu = () => [
   { name: "Sirop", price: 50, quantity: 0 },
   { name: "Collation", price: 200, quantity: 0 },
   { name: "Adhésion", price: 600, quantity: 0 },
-  { name: "Ticket gratuit", price: 0, quantity: 0 },
+  { name: "Boisson / collation gratuit(e)", price: 0, quantity: 0 },
   { name: "Don", price: 50, quantity: 0 },
 ];

@@ -1,7 +1,7 @@
 import OrderForm from "@/components/OrderForm";
 import { PrismaClient } from "@prisma/client";
-import OrderList from "./OrderList";
-import OrdersTotal from "./OrdersTotal";
+import OrderList from "@/components/OrderList";
+import OrdersTotal from "@/components/OrdersTotal";
 
 export default async function OrdersPage() {
   const prisma = new PrismaClient();
