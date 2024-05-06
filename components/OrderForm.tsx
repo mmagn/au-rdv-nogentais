@@ -50,37 +50,35 @@ export default function OrderForm({}: OrderFormProps) {
     <div>
       <div className="flex flex-col divide-y divide-gray-500">
         {items.map((item, index) => (
-          <div key={item.name} className="py-4">
-            <div className="flex gap-x-4 ">
-              <div className="flex flex-1 items-center">
-                <span>{item.name}</span>
-              </div>
-              <div className="flex flex-1 items-center">
-                <FormattedPrice value={item.price} />
-              </div>
+          <div key={item.name} className="flex gap-x-4 py-4">
+            <div className="flex flex-1 items-center">
+              <span>{item.name}</span>
+            </div>
+            <div className="flex flex-1 items-center">
+              <FormattedPrice value={item.price} />
+            </div>
 
-              <div className="flex gap-x-2 items-center bg-gray-200 rounded-lg p-2">
-                <div className="flex items-center gap-x-2 font-bold font-mono">
-                  <button
-                    onClick={() => updateQuantity(index, -1)}
-                    className={`text-white py-1 px-3 rounded-lg ${
-                      item.quantity === 0 ? "bg-gray-400" : "bg-red-500"
-                    }`}
-                  >
-                    -
-                  </button>
-                  <span className="text-xl ">{item.quantity}</span>
-                  <button
-                    onClick={() => updateQuantity(index, 1)}
-                    className="bg-green-500 text-white py-1 px-3 rounded-lg"
-                  >
-                    +
-                  </button>
-                </div>
+            <div className="flex gap-x-2 items-center bg-gray-200 rounded-lg p-2">
+              <div className="flex items-center gap-x-2 font-bold font-mono">
+                <button
+                  onClick={() => updateQuantity(index, -1)}
+                  className={`text-white py-1 px-3 rounded-lg ${
+                    item.quantity === 0 ? "bg-gray-400" : "bg-red-500"
+                  }`}
+                >
+                  -
+                </button>
+                <span className="text-xl ">{item.quantity}</span>
+                <button
+                  onClick={() => updateQuantity(index, 1)}
+                  className="bg-green-500 text-white py-1 px-3 rounded-lg"
+                >
+                  +
+                </button>
               </div>
-              <div className="flex flex-1 items-center justify-end">
-                <FormattedPrice value={item.price * item.quantity} />
-              </div>
+            </div>
+            <div className="flex flex-1 items-center justify-end">
+              <FormattedPrice value={item.price * item.quantity} />
             </div>
           </div>
         ))}
