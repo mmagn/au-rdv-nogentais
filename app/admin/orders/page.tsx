@@ -30,12 +30,19 @@ export default async function OrdersPage() {
   const totalCard = nonDeletedOrders
     .filter((o) => o.paymentMethod === "card")
     .reduce((acc, order) => acc + order.total, 0);
+  const totalCheck = nonDeletedOrders
+    .filter((o) => o.paymentMethod === "check")
+    .reduce((acc, order) => acc + order.total, 0);
 
   return (
     <div className="mx-auto max-w-lg flex flex-col gap-y-10 mb-10 px-2">
       <OrderForm />
       <OrderList orders={orders} />
-      <OrdersTotal totalCash={totalCash} totalCard={totalCard} />
+      <OrdersTotal
+        totalCash={totalCash}
+        totalCard={totalCard}
+        totalCheck={totalCheck}
+      />
     </div>
   );
 }

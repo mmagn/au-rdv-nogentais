@@ -6,7 +6,11 @@ export const total = (items: { quantity: number; price: number }[]) => {
 };
 
 export const paymentMethodHumanized = (method: string) => {
-  return method === "cash" ? "Espèces 🪙" : "Carte bancaire 💳";
+  return {
+    cash: "Espèces 🪙",
+    card: "Carte bancaire 💳",
+    check: "Chèque 📄",
+  }[method];
 };
 
 export const dateHumanized = (date: Date) => {

@@ -50,7 +50,7 @@ export default function OrderForm({}: OrderFormProps) {
     <div>
       <div className="flex flex-col divide-y divide-gray-500">
         {items.map((item, index) => (
-          <div key={item.name} className="flex gap-x-4 py-4">
+          <div key={item.name} className="flex items-center gap-x-4 py-4">
             <div className="flex flex-1 items-center">
               <span>{item.name}</span>
             </div>
@@ -92,13 +92,13 @@ export default function OrderForm({}: OrderFormProps) {
         <OrderItems items={selectedItems as OrderItem[]} />
 
         <div className="flex flex-1 font-bold py-4">
-          <form action={handlePayment}>
+          <form className="flex flex-1" action={handlePayment}>
             <input
               type="hidden"
               name="items"
               value={JSON.stringify(selectedItems)}
             />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col mx-auto gap-4">
               <OrderSubmitButton
                 text="Paiement en Espèces 🪙"
                 value="cash"
@@ -110,6 +110,12 @@ export default function OrderForm({}: OrderFormProps) {
                 value="card"
                 disabled={selectedItems.length < 1}
                 className="bg-emerald-500 border-emerald-700"
+              />
+              <OrderSubmitButton
+                text="Paiement en Chèque 📄"
+                value="check"
+                disabled={selectedItems.length < 1}
+                className="bg-red-400 border-red-600 text-black"
               />
             </div>
           </form>

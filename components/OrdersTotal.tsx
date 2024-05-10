@@ -4,11 +4,13 @@ import React from "react";
 export type OrdersTotalProps = {
   totalCash: number;
   totalCard: number;
+  totalCheck: number;
 };
 
 export default function OrdersTotal({
   totalCash,
   totalCard,
+  totalCheck,
 }: OrdersTotalProps) {
   return (
     <div className="flex flex-col gap-y-2">
@@ -19,6 +21,10 @@ export default function OrdersTotal({
       <p className="flex-1">
         <span>Total carte bancaire&nbsp;:&nbsp;</span>
         <FormattedPrice value={totalCard} />
+      </p>
+      <p className="flex-1">
+        <span>Total chèques&nbsp;:&nbsp;</span>
+        <FormattedPrice value={totalCheck} />
       </p>
     </div>
   );
