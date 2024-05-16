@@ -14,10 +14,8 @@ export const paymentMethodHumanized = (method: string) => {
 };
 
 export const dateHumanized = (date: Date) => {
-  // dd/mm/yyyy hh:mm
-  return dayjs(date).locale("fr").format("HH:mm DD/MM/YYYY");
+  return dayjs(date).locale("fr").format("DD/MM/YYYY");
 };
 export const hoursHumanized = (date: Date) => {
-  // hh:mm
   return dayjs(date).locale("fr").format("HH:mm");
 };

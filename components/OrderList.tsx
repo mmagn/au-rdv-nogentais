@@ -21,54 +21,49 @@ export type OrderListProps = {
 
 export default function OrderList({ orders }: OrderListProps) {
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Commandes précédentes</h1>
-      <div className="flex flex-col divide-y divide-gray-500">
-        <div className="flex flex-row font-bold mb-2">
-          <div className="flex-1">Date</div>
-          <div className="flex-1 text-right">Total</div>
-        </div>
-        <Accordion type="single" collapsible className="w-full">
-          {orders.map((order) => (
-            <AccordionItem value={order.id} key={order.id}>
-              <AccordionTrigger>
+    <div className="flex flex-col divide-y divide-gray-500">
+      <div className="flex flex-row font-bold mb-2">
+        <div className="flex-1">Heure</div>
+        <div className="flex-1 text-right">Total</div>
+      </div>
+      <Accordion type="single" collapsible className="w-full">
+        {orders.map((order) => (
+          <AccordionItem value={order.id} key={order.id}>
+            <AccordionTrigger>
+              <div
+                key={order.id}
+                className={`flex-1 flex flex-row pt-1 mb-1 mr-2 ${
+                  order.deletedAt ? "text-gray-400" : ""
+                }`}
+              >
                 <div
-                  key={order.id}
-                  className={`flex-1 flex flex-row pt-1 mb-1 mr-2 ${
-                    order.deletedAt ? "text-gray-400" : ""
+                  className={`flex-1 font-mono text-left ${
+                    order.deletedAt ? "line-through" : ""
                   }`}
                 >
-                  <div
-                    className={`flex-1 font-mono text-left ${
-                      order.deletedAt ? "line-through" : ""
-                    }`}
-                  >
-                    {hoursHumanized(order.createdAt)}
-                  </div>
-                  <div className="flex-1 flex flex-col text-right">
-                    {order.deletedAt ? (
-                      <span>Commande supprimée</span>
-                    ) : (
-                      <>
-                        <FormattedPrice value={order.total} />
-                        <span>
-                          {paymentMethodHumanized(order.paymentMethod)}
-                        </span>
-                      </>
-                    )}
-                  </div>
+                  {hoursHumanized(order.createdAt)}
                 </div>
-              </AccordionTrigger>
-              <AccordionContent>
-                <OrderItems items={order.items} />
-                <div className="flex justify-center">
-                  <DeleteOrderButton order={order} />
+                <div className="flex-1 flex flex-col text-right">
+                  {order.deletedAt ? (
+                    <span>Commande supprimée</span>
+                  ) : (
+                    <>
+                      <FormattedPrice value={order.total} />
+                      <span>{paymentMethodHumanized(order.paymentMethod)}</span>
+                    </>
+                  )}
                 </div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent>
+              <OrderItems items={order.items} />
+              <div className="flex justify-center">
+                <DeleteOrderButton order={order} />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </div>
   );
 }
