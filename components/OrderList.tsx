@@ -40,6 +40,7 @@ export default function OrderList({ orders }: OrderListProps) {
                   className={`flex-1 font-mono text-left ${
                     order.deletedAt ? "line-through" : ""
                   }`}
+                  title={order.createdAt.toJSON()}
                 >
                   {hoursHumanized(order.createdAt)}
                 </div>
