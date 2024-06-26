@@ -6,10 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { hoursHumanized, paymentMethodHumanized } from "@/lib/order";
+import { paymentMethodHumanized } from "@/lib/order";
 import { Prisma } from "@prisma/client";
 
 import DeleteOrderButton from "./DeleteOrderButton";
+import { hoursHumanized } from "@/lib/dayjs";
 
 export type OrderListProps = {
   orders: Prisma.OrderGetPayload<{

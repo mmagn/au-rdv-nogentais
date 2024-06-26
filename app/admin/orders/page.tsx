@@ -1,13 +1,24 @@
 import OrderForm from "@/components/OrderForm";
-import { PrismaClient } from "@prisma/client";
 import OrderList from "@/components/OrderList";
 import OrdersTotal from "@/components/OrdersTotal";
-import { dateHumanized } from "@/lib/order";
+import { dateHumanized, localDayjs } from "@/lib/dayjs";
+import { PrismaClient } from "@prisma/client";
 
-export default async function OrdersPage() {
+export default async function OrdersPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const prisma = new PrismaClient();
 
-  const today = new Date();
+  const date = searchParams["date"];
+
+  let today = new Date();
+  if (date) {
+    today = localDayjs(date as string, "DD-MM-YYYY").toDate();
+  }
+
+  const gteDate = new Date(today.setHours(0, 0, 0, 0));
 
   const orders = await prisma.order.findMany({
     orderBy: [
@@ -17,7 +28,8 @@ export default async function OrdersPage() {
     ],
     where: {
       createdAt: {
-        gte: new Date(today.setHours(0, 0, 0, 0)),
+        gte: gteDate,
+        lt: localDayjs(gteDate).add(1, "day").toDate(),
       },
     },
     include: {
