@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { localDayjs } from "@/lib/dayjs";
 
+export const fetchCache = "force-no-store";
+
 export async function GET(request: Request) {
   const prisma = new PrismaClient();
 
