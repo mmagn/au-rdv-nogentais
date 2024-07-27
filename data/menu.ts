@@ -5,7 +5,7 @@ export const getMenu = () => [
   { name: "Kir", price: 300, quantity: 0 },
   { name: "Rivesaltes", price: 400, quantity: 0 },
   { name: "Boisson chaude", price: 100, quantity: 0 },
-  { name: "Chocolat chaud", price: 200, quantity: 0 },
+  { name: "Chocolat chaud", price: 150, quantity: 0 },
   { name: "Jus de fruit", price: 150, quantity: 0 },
   { name: "Limonade", price: 150, quantity: 0 },
   { name: "Diabolo", price: 200, quantity: 0 },
