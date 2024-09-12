@@ -2,7 +2,7 @@ export const getMenu = () => [
   { name: "Bière", price: 400, quantity: 0 },
   { name: "Bière sans alcool", price: 300, quantity: 0 },
   { name: "Vin", price: 200, quantity: 0 },
-  { name: "Kir", price: 300, quantity: 0 },
+  { name: "Kir", price: 250, quantity: 0 },
   { name: "Rivesaltes", price: 400, quantity: 0 },
   { name: "Boisson chaude", price: 100, quantity: 0 },
   { name: "Chocolat chaud", price: 150, quantity: 0 },
