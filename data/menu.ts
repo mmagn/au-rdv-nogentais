@@ -13,7 +13,7 @@ export const getMenu = () => [
   { name: "Grande collation", price: 200, quantity: 0 },
   { name: "Collation", price: 100, quantity: 0 },
   { name: "Petite collation", price: 50, quantity: 0 },
-  { name: "Adhésion", price: 300, quantity: 0 },
-  { name: "Réduction 1€ avec adhésion", price: -100, quantity: 0 },
+  { name: "Adhésion", price: 600, quantity: 0 },
+  { name: "Boisson / collation gratuit(e)", price: 0, quantity: 0 },
   { name: "Don", price: 50, quantity: 0 },
 ];
