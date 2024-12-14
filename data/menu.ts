@@ -1,10 +1,10 @@
 export const getMenu = () => [
   {
-    name: "🎄 Boisson Sans Alcool",
+    name: "🎄 Boisson 1€",
     price: 100,
     quantity: 0,
   },
-  { name: "🎄 Boisson Alcoolisée", price: 200, quantity: 0 },
+  { name: "🎄 Boisson 2€", price: 200, quantity: 0 },
   { name: "Bière", price: 300, quantity: 0 },
   { name: "Bière sans alcool", price: 300, quantity: 0 },
   { name: "Vin", price: 200, quantity: 0 },
