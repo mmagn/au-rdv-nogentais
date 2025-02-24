@@ -11,6 +11,7 @@ import { Prisma } from "@prisma/client";
 
 import DeleteOrderButton from "./DeleteOrderButton";
 import { hoursHumanized } from "@/lib/dayjs";
+import Avatar from "./Avatar";
 
 export type OrderListProps = {
   orders: Prisma.OrderGetPayload<{
@@ -38,12 +39,17 @@ export default function OrderList({ orders }: OrderListProps) {
                 }`}
               >
                 <div
-                  className={`flex-1 font-mono text-left ${
+                  className={`flex items-center flex-1 font-mono text-left ${
                     order.deletedAt ? "line-through" : ""
                   }`}
                   title={order.createdAt.toJSON()}
                 >
-                  {hoursHumanized(order.createdAt)}
+                  <span>{hoursHumanized(order.createdAt)}</span>
+                  {order.userAgent && (
+                    <span className="ml-2" title={order.userAgent}>
+                      <Avatar text={order.userAgent} size={20} />
+                    </span>
+                  )}
                 </div>
                 <div className="flex-1 flex flex-col text-right">
                   {order.deletedAt ? (

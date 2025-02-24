@@ -8,12 +8,14 @@ const prisma = new PrismaClient();
 
 export const createOrder = async (
   paymentMethod: string,
-  items: { quantity: number; price: number; name: string }[]
+  items: { quantity: number; price: number; name: string }[],
+  userAgent: string
 ) => {
   const order = await prisma.order.create({
     data: {
       paymentMethod,
       total: total(items),
+      userAgent,
       items: {
         create: items.map((item) => ({
           name: item.name,

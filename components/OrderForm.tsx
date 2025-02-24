@@ -36,7 +36,11 @@ export default function OrderForm({}: OrderFormProps) {
   const handlePayment = async (formData: FormData) => {
     const items = JSON.parse(formData.get("items") as string);
 
-    await createOrder(formData.get("paymentMethod") as string, items);
+    await createOrder(
+      formData.get("paymentMethod") as string,
+      items,
+      navigator.userAgent
+    );
 
     // reset items
     setItems(() => getMenu());
