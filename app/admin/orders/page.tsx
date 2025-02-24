@@ -55,12 +55,12 @@ export default async function OrdersPage({
       <h3 className="text-2xl font-bold">
         Commandes du {dateHumanized(today)}
       </h3>
-      <OrderList orders={orders} />
       <OrdersTotal
         totalCash={totalCash}
         totalCard={totalCard}
         totalCheck={totalCheck}
       />
+      <OrderList orders={orders} />
     </div>
   );
 }
