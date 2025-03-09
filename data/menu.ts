@@ -21,6 +21,6 @@ export const getMenu = () => [
   { name: "🍽️ Collation", price: 100, quantity: 0 },
   { name: "🍽️ Petite collation", price: 50, quantity: 0 },
   { name: "💰 Adhésion", price: 300, quantity: 0 },
-  { name: "💰 Réduction 1€ avec Adhésion", price: -100, quantity: 0 },
+  { name: "💰 Réduction avec Adhésion", price: -100, quantity: 0 },
   { name: "💰 Don", price: 50, quantity: 0 },
 ];

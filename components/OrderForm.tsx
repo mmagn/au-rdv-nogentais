@@ -58,7 +58,7 @@ export default function OrderForm({}: OrderFormProps) {
             <div className="flex flex-1 items-center">
               <span>{item.name}</span>
             </div>
-            <div className="flex flex-1 items-center">
+            <div className="flex items-center">
               <FormattedPrice value={item.price} />
             </div>
 
@@ -81,9 +81,9 @@ export default function OrderForm({}: OrderFormProps) {
                 </button>
               </div>
             </div>
-            <div className="flex flex-1 items-center justify-end">
+            {/* <div className="flex flex-1 items-center justify-end">
               <FormattedPrice value={item.price * item.quantity} />
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
