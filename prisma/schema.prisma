@@ -47,7 +47,7 @@ model Member {
   address              String?
   lastRegisteredAt     DateTime
   isLessThan14YearsOld Boolean   @default(false)
-  registrationNumber   Int       @unique @default(autoincrement())
+  memberNumber         Int       @unique @default(autoincrement())
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
 }
