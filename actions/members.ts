@@ -48,7 +48,7 @@ export const createMember = async (formData: FormData) => {
     console.error("Error creating member:", error);
     return {
       success: false,
-      message: "Une erreur est survenue lors de la création du membre",
+      message: "Une erreur est survenue lors de la création de l'adhérent",
     };
   }
 };
@@ -97,7 +97,7 @@ export const updateMember = async (formData: FormData) => {
     console.error("Error updating member:", error);
     return {
       success: false,
-      message: "Une erreur est survenue lors de la mise à jour du membre",
+      message: "Une erreur est survenue lors de la mise à jour de l'adhérent",
     };
   }
 };

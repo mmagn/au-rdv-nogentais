@@ -7,7 +7,7 @@ export type MemberListProps = {
 
 export default function MemberList({ members }: MemberListProps) {
   if (members.length === 0) {
-    return <div className="text-center py-8">Aucun membre trouvé</div>;
+    return <div className="text-center py-8">Aucun adhérent trouvé</div>;
   }
 
   return (

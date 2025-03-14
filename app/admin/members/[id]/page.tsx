@@ -1,5 +1,6 @@
 import { updateMember } from "@/actions/members";
 import MemberForm from "@/components/MemberForm";
+import TopNav from "@/components/TopNav";
 import { PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
 
@@ -22,9 +23,11 @@ export default async function MemberDetailPage({
   }
 
   return (
-    <div className="mx-auto max-w-lg flex flex-col gap-y-10 mb-10 px-2">
+    <div className="mx-auto max-w-lg flex flex-col gap-y-6 mb-10 px-2">
+      <TopNav />
+
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Détails du membre</h1>
+        <h1 className="text-2xl font-bold">Détails de l'adhérent</h1>
         <div className="text-sm font-mono">
           N° {member.memberNumber.toString().padStart(4, "0")}
         </div>

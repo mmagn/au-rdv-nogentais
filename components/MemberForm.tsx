@@ -34,7 +34,9 @@ export default function MemberForm({ member, onSubmit }: MemberFormProps) {
 
       if (result.success) {
         toast({
-          description: member?.id ? "✅ Membre mis à jour" : "✅ Membre créé",
+          description: member?.id
+            ? "✅ Adhérent mis à jour"
+            : "✅ Adhérent créé",
         });
         router.push("/admin/members");
         router.refresh();

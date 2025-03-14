@@ -1,6 +1,7 @@
 import OrderForm from "@/components/OrderForm";
 import OrderList from "@/components/OrderList";
 import OrdersTotal from "@/components/OrdersTotal";
+import TopNav from "@/components/TopNav";
 import { dateHumanized, localDayjs } from "@/lib/dayjs";
 import { PrismaClient } from "@prisma/client";
 
@@ -50,7 +51,8 @@ export default async function OrdersPage({
     .reduce((acc, order) => acc + order.total, 0);
 
   return (
-    <div className="mx-auto max-w-lg flex flex-col gap-y-10 mb-10 px-2">
+    <div className="mx-auto max-w-lg flex flex-col gap-y-6 mb-10 px-2">
+      <TopNav />
       <OrderForm />
       <h3 className="text-2xl font-bold">
         Commandes du {dateHumanized(today)}

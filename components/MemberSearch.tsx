@@ -26,7 +26,7 @@ export default function MemberSearch() {
         <input
           type="text"
           name="search"
-          placeholder="Rechercher un membre..."
+          placeholder="Rechercher un adhérent..."
           defaultValue={search}
           className="flex-1 p-2 border rounded-md"
         />
@@ -34,7 +34,7 @@ export default function MemberSearch() {
       </form>
       <div className="flex justify-end">
         <Button onClick={() => router.push("/admin/members/new")}>
-          Nouveau membre
+          Nouvel adhérent
         </Button>
       </div>
     </div>

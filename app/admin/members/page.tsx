@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import MemberList from "@/components/MemberList";
 import MemberSearch from "@/components/MemberSearch";
+import TopNav from "@/components/TopNav";
 
 export default async function MembersPage({
   searchParams,
@@ -41,8 +42,9 @@ export default async function MembersPage({
   });
 
   return (
-    <div className="mx-auto max-w-lg flex flex-col gap-y-10 mb-10 px-2">
-      <h1 className="text-2xl font-bold">Liste des membres</h1>
+    <div className="mx-auto max-w-lg flex flex-col gap-y-6 mb-10 px-2">
+      <TopNav />
+      <h1 className="text-2xl font-bold">Liste des adhérents</h1>
       <MemberSearch />
       <MemberList members={members} />
     </div>
