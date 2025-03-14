@@ -5,35 +5,56 @@ import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
+// Extract common validation function
+const validateMemberData = (
+  memberData: { firstName: string; lastName: string },
+  id?: string
+) => {
+  if (!memberData.firstName || !memberData.lastName) {
+    return {
+      success: false,
+      message: id
+        ? "ID, prénom et nom sont obligatoires"
+        : "Le prénom et le nom sont obligatoires",
+    };
+  }
+  return null;
+};
+
+// Extract common data preparation function
+const prepareMemberData = (formData: FormData) => {
+  const firstName = formData.get("firstName") as string;
+  const lastName = formData.get("lastName") as string;
+  const email = (formData.get("email") as string) || null;
+  const phone = (formData.get("phone") as string) || null;
+  const zip = (formData.get("zip") as string) || null;
+  const city = (formData.get("city") as string) || null;
+  const address = (formData.get("address") as string) || null;
+  const isLessThan14YearsOld = formData.get("isLessThan14YearsOld") === "on";
+
+  return {
+    firstName,
+    lastName,
+    email,
+    phone,
+    zip,
+    city,
+    address,
+    isLessThan14YearsOld,
+  };
+};
+
 export const createMember = async (formData: FormData) => {
   try {
-    const firstName = formData.get("firstName") as string;
-    const lastName = formData.get("lastName") as string;
-    const email = (formData.get("email") as string) || null;
-    const phone = (formData.get("phone") as string) || null;
-    const zip = (formData.get("zip") as string) || null;
-    const city = (formData.get("city") as string) || null;
-    const address = (formData.get("address") as string) || null;
-    const isLessThan14YearsOld = formData.get("isLessThan14YearsOld") === "on";
+    const memberData = prepareMemberData(formData);
 
     // Validate required fields
-    if (!firstName || !lastName) {
-      return {
-        success: false,
-        message: "Le prénom et le nom sont obligatoires",
-      };
-    }
+    const validationError = validateMemberData(memberData);
+    if (validationError) return validationError;
 
     const member = await prisma.member.create({
       data: {
-        firstName,
-        lastName,
-        email,
-        phone,
-        zip,
-        city,
-        address,
-        isLessThan14YearsOld,
+        ...memberData,
         lastRegisteredAt: new Date(),
       },
     });
@@ -56,35 +77,15 @@ export const createMember = async (formData: FormData) => {
 export const updateMember = async (formData: FormData) => {
   try {
     const id = formData.get("id") as string;
-    const firstName = formData.get("firstName") as string;
-    const lastName = formData.get("lastName") as string;
-    const email = (formData.get("email") as string) || null;
-    const phone = (formData.get("phone") as string) || null;
-    const zip = (formData.get("zip") as string) || null;
-    const city = (formData.get("city") as string) || null;
-    const address = (formData.get("address") as string) || null;
-    const isLessThan14YearsOld = formData.get("isLessThan14YearsOld") === "on";
+    const memberData = prepareMemberData(formData);
 
     // Validate required fields
-    if (!id || !firstName || !lastName) {
-      return {
-        success: false,
-        message: "ID, prénom et nom sont obligatoires",
-      };
-    }
+    const validationError = validateMemberData(memberData, id);
+    if (validationError) return validationError;
 
     const member = await prisma.member.update({
       where: { id },
-      data: {
-        firstName,
-        lastName,
-        email,
-        phone,
-        zip,
-        city,
-        address,
-        isLessThan14YearsOld,
-      },
+      data: memberData,
     });
 
     revalidatePath("/admin/members");
